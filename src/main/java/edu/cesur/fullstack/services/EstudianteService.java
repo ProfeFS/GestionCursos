@@ -6,6 +6,8 @@ public interface EstudianteService {
 	
 	EstudianteDTO createEstudiante(EstudianteDTO estudianteDTO);
 	
+	EstudianteDTO createEstudianteWhithCourse(EstudianteDTO estudianteDTO);
+	
 	EstudianteDTO inscribirEstudianteAunCurso(Long estudianteId, Long cursoId);
 
 

@@ -27,7 +27,7 @@ public class CursoEntity {
     private String descripcion;
 
     @OneToMany(mappedBy = "curso")
-    private List<EstudianteEntity> estudiantes = new ArrayList();
+    private List<EstudianteEntity> estudiantes;
 
 
 }

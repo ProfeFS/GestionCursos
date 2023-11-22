@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CursoDTO {
 
-	private Long curso_id;
+	private Long cursoId;
 	private String nombre;
 	private String codigoCurso;
 	private String descripcion;

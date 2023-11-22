@@ -11,6 +11,7 @@ import edu.cesur.fullstack.persistence.entities.CursoEntity;
 import edu.cesur.fullstack.persistence.entities.EstudianteEntity;
 import edu.cesur.fullstack.persistence.repositories.CursoRepository;
 import edu.cesur.fullstack.persistence.repositories.EstudianteRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class EstudianteServiceImpl  implements EstudianteService{
@@ -29,6 +30,25 @@ public class EstudianteServiceImpl  implements EstudianteService{
 		EstudianteEntity estE = estudianteRepository.save(estudianteMapper.toEntity(estudianteDTO));
 		return estudianteMapper.toDto(estE);
 	}
+	
+	
+
+	@Override
+	@Transactional
+	public EstudianteDTO createEstudianteWhithCourse(EstudianteDTO estudianteDTO) {
+		EstudianteEntity estudiante = estudianteMapper.toEntity(estudianteDTO);
+	    
+		if (estudianteDTO.getCursoId() != null) {
+	        CursoEntity curso = cursoRepository.findById(estudianteDTO.getCursoId())
+	                            .orElseThrow(() -> new RuntimeException("curso no encontrado"));
+	        
+	        estudiante.setCurso(curso);
+	    }
+		
+	    estudiante = estudianteRepository.save(estudiante);
+	    return estudianteMapper.toDto(estudiante);
+	}
+	
 
 	@Override
 	public EstudianteDTO inscribirEstudianteAunCurso(Long estudianteId, Long cursoId) {
@@ -45,6 +65,7 @@ public class EstudianteServiceImpl  implements EstudianteService{
         return estudianteMapper.toDto(estudiante);
 		
 	}
+
 	
 
 

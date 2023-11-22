@@ -38,7 +38,22 @@ public class EstudianteRestController {
 		
 	}
 	
-	@PostMapping("/{estudianteId}/inscribir/{cursoId}")
+	@PostMapping("/curso")
+	public ResponseEntity<?> createStudentWhithCourse(@RequestBody EstudianteDTO estudianteDTO) {
+
+		EstudianteDTO est = estudianteService.createEstudianteWhithCourse(estudianteDTO);
+		URI location = ServletUriComponentsBuilder
+				.fromCurrentRequest()
+				.path("/" + est.getId())
+				.buildAndExpand(est.getId())
+				.toUri();
+		
+		return ResponseEntity.created(location).build();
+		
+		
+	}
+	
+	@PostMapping("/{estudianteId}/inscripcion/{cursoId}")
     public ResponseEntity<EstudianteDTO> inscribirEstudianteACurso(@PathVariable Long estudianteId, @PathVariable Long cursoId) {
         EstudianteDTO estudianteDTO = estudianteService.inscribirEstudianteAunCurso(estudianteId, cursoId);
         return ResponseEntity.ok(estudianteDTO);
