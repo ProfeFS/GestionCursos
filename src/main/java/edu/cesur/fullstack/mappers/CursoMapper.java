@@ -8,6 +8,8 @@ import edu.cesur.fullstack.persistence.entities.CursoEntity;
 
 @Mapper(componentModel = "spring", uses = {EstudianteMapper.class})
 public interface CursoMapper {
+	
+	//@Mapping(target = "estudiantes", ignore = true)
     CursoDTO toDto(CursoEntity curso);
     CursoEntity toEntity(CursoDTO cursoDTO);
     
